@@ -54,7 +54,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			// id = 23
 			// This decides whether the turbo pump turns on
-			cout << endl << "Do you want to turn: On or Off" << endl << "Command: ";
+			int turboPumpState = TC110->GetTurboPumpState();
+			cout << endl << "Do you want to turn: On or Off" << endl << "Currently set at:" << turboPumpState << endl << "Command: ";
 			getline(cin, value);
 
 			if(value == "On"){
@@ -70,7 +71,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			// id = 25
 			// This decides how the backing pump is used
-			cout << endl << "Select between: Continuous, Intermittent, Delayed, Delayed + Intermittent?"  << endl << "Command: ";
+			int backingPumpMode = TC110->GetBackingPumpMode();
+			cout << endl << "Select between: Continuous, Intermittent, Delayed, Delayed + Intermittent?"  << endl << "Currently set at:" << backingPumpMode << endl <<"Command: ";
 			getline(cin, value);
 
 			if(value == "Continuous"){ // option = 0
@@ -88,8 +90,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 		else if(command == "Gas Mode")
 		{
-			// id = 27
-			cout << endl << "Select between: Heavy (>39, 0), Light(=<39, 1), or Helium(2)?"  << endl << "Command: ";
+			// id = 027
+			int gasMode = TC110->GetGasMode();
+			cout << endl << "Select between: Heavy (>39, 0), Light(=<39, 1), or Helium(2)?"  << endl << "Currently set at:" << gasMode << endl << "Command: ";
 			getline(cin, value);
 
 			if(value == "Heavy"){ // option = 0

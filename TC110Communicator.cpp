@@ -83,7 +83,7 @@ TC110Communicator::TC110Communicator(char *portName, int id)
 				Sleep(2000);
 
 				// Check connection with id
-				std::string response = this->send("00", "349", "=?", 20);
+				std::string response = this->send("00", "349", "=?", 19);
 				if(response == "false"){
 					this->connected = false;
 				}
@@ -168,7 +168,7 @@ std::string TC110Communicator::ReadPackage(unsigned int byteCount)
 		//If there is we check if there is enough data to read the required number
 		//of characters, if not we'll read only the available characters to prevent
 		//locking of the application.
-		if(this->status.cbInQue>byteCount)
+		if(this->status.cbInQue > byteCount)
 		{
 			toRead = byteCount;
 		}
@@ -183,7 +183,7 @@ std::string TC110Communicator::ReadPackage(unsigned int byteCount)
 			//return std::to_string(bytesRead);
 			std::string buffer_string = std::string(package_char);
 			return buffer_string;
-		}
+		}else{ 	return "false to read"; }
 
 	}
 
@@ -335,21 +335,6 @@ std::string TC110Communicator::send(std::string action, std::string parameterVal
 	Sleep(125);
 
 	// Read the responce from the sent package only accepting id of 961
-	/*bool correctId = false;
-	std::string read;
-	int count = 0;
-	while(correctId == false){
-		read = this->ReadPackage(bytesRead);
-		std::cout << read.substr(3) << std::endl;
-		count++;
-		if(read.substr(3) == "123")
-			correctId = true;
-
-		if(count == 50){
-			correctId = true;
-			//read = "false";
-		}
-	}*/
 	std::string read = this->ReadPackage(bytesRead);
 
 	// Check for valid message via check sum
@@ -481,7 +466,6 @@ std::string TC110Communicator::GetError(int id)
 
 	// Send request, receive it and check it's valid
 	std::string response = this->send("00", param, "=?", 20);
-	//std::cout << response << std::endl;
 
 	if(response != "false"){
 		// Take the data we want
@@ -506,7 +490,28 @@ std::string TC110Communicator::GetError(int id)
  */
 int TC110Communicator::GetGasMode()
 {
-   return 1520;
+	// Get the correct param type
+	std::string param = "027";
+
+	// Send request, receive it and check it's valid
+	std::string response = this->send("00", param, "=?", 17);
+
+	if(response != "false"){
+		// Take the data we want
+		response = response.erase( response.length()-3 );
+		response = response.substr( 11, 13 );
+
+		// Return as int to match Pfeiffer RS485 spec
+		if(response == "000"){
+			return 0;
+		}else if(response == "001"){
+			return 1;
+		}else if(response == "002"){
+			return 2;
+		}
+	}
+
+   return 999;
 }
 
 /**
@@ -521,7 +526,30 @@ int TC110Communicator::GetGasMode()
  */
 int TC110Communicator::GetBackingPumpMode()
 {
-   return 1520;
+   // Get the correct param type
+	std::string param = "025";
+
+	// Send request, receive it and check it's valid
+	std::string response = this->send("00", param, "=?", 17);
+
+	if(response != "false"){
+		// Take the data we want
+		response = response.erase( response.length()-3 );
+		response = response.substr( 11, 13 );
+
+		// Return as int to match Pfeiffer RS485 spec
+		if(response == "000"){
+			return 0;
+		}else if(response == "001"){
+			return 1;
+		}else if(response == "002"){
+			return 2;
+		}else if(response == "003"){
+			return 3;
+		}
+	}
+
+   return 999;
 }
 
 /**
@@ -535,7 +563,26 @@ int TC110Communicator::GetBackingPumpMode()
  */
 int TC110Communicator::GetTurboPumpState()
 {
-   return 1520;
+	// Get the correct param type
+	std::string param = "023";
+
+	// Send request, receive it and check it's valid
+	std::string response = this->send("00", param, "=?", 20);
+
+	if(response != "false"){
+		// Take the data we want
+		response = response.erase( response.length()-3 );
+		response = response.substr( 11, 15 );
+
+		// Return as int to match Pfeiffer RS485 spec
+		if(response == "000000"){
+			return 0;
+		}else if(response == "111111"){
+			return 1;
+		}
+	}
+
+   return 999;
 }
 
 
