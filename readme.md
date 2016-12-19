@@ -9,7 +9,7 @@ The project is built with and devloped in Visual Studio 2012.
 ```c++
 TC110Communicator* TC110 = new TC110Communicator("COM2", 123); //123
 ```
-*Remember on windows for com ports larger than 9 using the following format ```\\\\.\\COM12"```*
+*Remember on windows for com ports larger than 9 using the following format ```\\\\.\\COM12```*
 
 **Check that you are successfully connect**
 ```c++
