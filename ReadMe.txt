@@ -1,40 +1,42 @@
-========================================================================
-    CONSOLE APPLICATION : turbo_pump_station Project Overview
-========================================================================
+# Pfeiffer Vacuum TC110 Electronic Drive Unit
 
-AppWizard has created this turbo_pump_station application for you.
+The project contains a C++ class (Windows support only) for controlling Pheiffer Vacuum's TC110 electronic drive unit over RS-485. The project also contains an example console applcation to demostrate using the class or for general debugging.
 
-This file contains a summary of what you will find in each of the files that
-make up your turbo_pump_station application.
+The project is built with and devloped in Visual Studio 2012.
+
+### Example usage
+**First create an instance of the class**
+```c++
+TC110Communicator* TC110 = new TC110Communicator("COM2", 123); //123
+```
+*Remember on windows for com ports larger than 9 using the following format ```\\\\.\\COM12"```*
+
+**Check that you are successfully connect**
+```c++
+if(TC110->IsConnected()){
+	// Method of choice
+}
+```
+
+**Finally call the method for the information required**
+```c++
+	// Get the temperature of the bottom of the pump
+	double temperature = TC110->GetTemperature(1);
+	cout << temperature << endl << endl;
+```
+
+**All the above together**
+```c++
+TC110Communicator* TC110 = new TC110Communicator("COM2", 123); // COMPORT,  TC110 RS-485 ID
+if(TC110->IsConnected()){
+	// Get the temperature of the bottom of the pump
+	double temperature = TC110->GetTemperature(1);
+	cout << temperature << endl << endl;
+}
+```
 
 
-turbo_pump_station.vcxproj
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
+### CopyRight
+GNU license applies, for special permissions please contact.
 
-turbo_pump_station.vcxproj.filters
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
-
-turbo_pump_station.cpp
-    This is the main application source file.
-
-/////////////////////////////////////////////////////////////////////////////
-Other standard files:
-
-StdAfx.h, StdAfx.cpp
-    These files are used to build a precompiled header (PCH) file
-    named turbo_pump_station.pch and a precompiled types file named StdAfx.obj.
-
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
-
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
-
-/////////////////////////////////////////////////////////////////////////////
+In no way is this project connected in any way to Pfeiffer Vacuum themselfs.
