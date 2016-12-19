@@ -39,7 +39,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			// id = 10
 			// This includes turbo pump and backing pump
-			cout << endl << "Do you want to turn: On or Off" << endl << "Command: ";
+			int pumpingState = TC110->GetPumpingState();
+			cout << endl << "Do you want to turn: On (1) or Off (0)" << endl << "Currently set at:" << pumpingState << endl << "Command: ";
 			getline(cin, value);
 		
 			if(value == "On"){

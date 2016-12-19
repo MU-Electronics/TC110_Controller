@@ -597,7 +597,26 @@ int TC110Communicator::GetTurboPumpState()
  */
 int TC110Communicator::GetPumpingState()
 {
-   return 1520;
+   // Get the correct param type
+	std::string param = "010";
+
+	// Send request, receive it and check it's valid
+	std::string response = this->send("00", param, "=?", 20);
+
+	if(response != "false"){
+		// Take the data we want
+		response = response.erase( response.length()-3 );
+		response = response.substr( 11, 15 );
+
+		// Return as int to match Pfeiffer RS485 spec
+		if(response == "000000"){
+			return 0;
+		}else if(response == "111111"){
+			return 1;
+		}
+	}
+
+   return 999;
 }
 
 
