@@ -327,7 +327,6 @@ std::string TC110Communicator::send(std::string action, std::string parameterVal
 {
 	// Create package to send
 	std::string package = this->CreatePackage(action, parameterValue, data);
-	std::cout <<  package << std::endl;
 
 	// Write the package to the bus
 	this->WritePackage(package);
@@ -337,7 +336,6 @@ std::string TC110Communicator::send(std::string action, std::string parameterVal
 
 	// Read the responce from the sent package only accepting id of 961
 	std::string read = this->ReadPackage(bytesRead);
-	std::cout << read << std::endl;
 
 	if(read != "" && read != "\r"){
 		// Check for valid message via check sum

@@ -1,5 +1,7 @@
 # Pfeiffer Vacuum TC110 Electronic Drive Unit
 
+**Currently in development, master branch will change excessively!**
+
 The project contains a C++ class (Windows support only) for controlling Pheiffer Vacuum's TC110 electronic drive unit over RS-485. The project also contains an example console applcation to demostrate using the class or for general debugging.
 
 The project is built with and devloped in Visual Studio 2012.
