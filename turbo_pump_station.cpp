@@ -44,9 +44,11 @@ int _tmain(int argc, _TCHAR* argv[])
 			getline(cin, value);
 		
 			if(value == "On"){
-					
+				pumpingState = TC110->SetPumpingState(1);
+				cout << "Pumping station has been turned on!"<< endl;
 			}else if(value == "Off"){
-					
+				pumpingState = TC110->SetPumpingState(0);
+				cout << "Pumping station has been turned off!"<< endl;
 			}else{
 				cout << "I dont understand you :| returning to beginning"  << endl  << endl;
 			}

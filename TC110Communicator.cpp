@@ -733,7 +733,7 @@ bool TC110Communicator::SetBackingPumpMode(int mode)
  */
 bool TC110Communicator::SetTurboPumpState(int state)
 {
-   // Get the correct param type
+	// Get the correct param type
 	std::string param = "023";
 	std::string modeChange;
 	std::string returnedModeChange;
@@ -747,13 +747,11 @@ bool TC110Communicator::SetTurboPumpState(int state)
 
 	// Send request, receive it and check it's valid
 	std::string response = this->send("10", param, modeChange, 20);
-	std::cout << response << std::endl;
 
 	if(response != "false"){
 		// Take the data we want
 		response = response.erase( response.length()-3 );
 		response = response.substr( 11, 15 );
-		std::cout << response << std::endl;
 
 		// Return as int to match Pfeiffer RS485 spec
 		if(response == returnedModeChange){
@@ -761,7 +759,7 @@ bool TC110Communicator::SetTurboPumpState(int state)
 		}
 	}
 
-   return false;
+	return false;
 }
 
 
@@ -776,6 +774,32 @@ bool TC110Communicator::SetTurboPumpState(int state)
  */
 bool TC110Communicator::SetPumpingState(int state)
 {
-   return true;
+   // Get the correct param type
+	std::string param = "010";
+	std::string modeChange;
+	std::string returnedModeChange;
+	if(state == 0){
+		modeChange = "000";
+		returnedModeChange = "000000";
+	}else if(state == 1){
+		modeChange = "111";
+		returnedModeChange = "111111";
+	}
+
+	// Send request, receive it and check it's valid
+	std::string response = this->send("10", param, modeChange, 20);
+
+	if(response != "false"){
+		// Take the data we want
+		response = response.erase( response.length()-3 );
+		response = response.substr( 11, 15 );
+
+		// Return as int to match Pfeiffer RS485 spec
+		if(response == returnedModeChange){
+			return true;
+		}
+	}
+
+	return false;
 }
 
