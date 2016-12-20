@@ -60,9 +60,11 @@ int _tmain(int argc, _TCHAR* argv[])
 			getline(cin, value);
 
 			if(value == "On"){
-					
+				turboPumpState = TC110->SetTurboPumpState(1);
+				cout << "Turbo pump has been enabled"<< endl;
 			}else if(value == "Off"){
-					
+				turboPumpState = TC110->SetTurboPumpState(0);
+				cout << "Turbo pump has been disabled"<< endl;
 			}else{
 				cout << "I dont understand you :| returning to beginning"  << endl  << endl;
 			}
@@ -73,17 +75,21 @@ int _tmain(int argc, _TCHAR* argv[])
 			// id = 25
 			// This decides how the backing pump is used
 			int backingPumpMode = TC110->GetBackingPumpMode();
-			cout << endl << "Select between: Continuous, Intermittent, Delayed, Delayed + Intermittent?"  << endl << "Currently set at:" << backingPumpMode << endl <<"Command: ";
+			cout << endl << "Select between: Continuous (0), Intermittent (1), Delayed (2), Delayed + Intermittent (3)?"  << endl << "Currently set at:" << backingPumpMode << endl <<"Command: ";
 			getline(cin, value);
 
 			if(value == "Continuous"){ // option = 0
-					
+				backingPumpMode = TC110->SetBackingPumpMode(0);
+				cout << "Backing Pump Mode Continuous"<< endl;	
 			}else if(value == "Intermittent"){ // option = 1
-					
+					backingPumpMode = TC110->SetBackingPumpMode(1);
+				cout << "Backing Pump Mode Intermittent"<< endl;	
 			}else if(value == "Delayed"){ // option = 2
-					
+					backingPumpMode = TC110->SetBackingPumpMode(2);
+				cout << "Backing Pump Mode Delayed"<< endl;	
 			}else if(value == "Delayed + Intermittent"){ // option = 3
-					
+					backingPumpMode = TC110->SetBackingPumpMode(3);
+				cout << "Backing Pump Mode Delayed + Intermittent"<< endl;	
 			}else{
 				cout << "I dont understand you :| returning to beginning"  << endl  << endl;
 			}
@@ -97,11 +103,14 @@ int _tmain(int argc, _TCHAR* argv[])
 			getline(cin, value);
 
 			if(value == "Heavy"){ // option = 0
-				
+				gasMode = TC110->SetGasMode(0);
+				cout << "Gas mode set to heavy gas"<< endl;
 			}else if(value == "Light"){ //option = 1
-
+				gasMode = TC110->SetGasMode(1);
+				cout << "Gas mode set to light gas"<< endl;
 			}else if(value == "Helium"){ //option = 2
-
+				gasMode = TC110->SetGasMode(2);
+				cout << "Gas mode set to helium"<< endl;
 			}else{
 				cout << "I dont understand you :| returning to beginning"  << endl  << endl;
 			}
