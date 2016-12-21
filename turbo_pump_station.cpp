@@ -26,7 +26,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	// While connected allow commands
 	while(TC110->IsConnected())	
 	{
-		cout << endl << "Select between: " << endl << "Pump Station, Turbo Pump, Backing Pump Mode, Gas Mode," << endl << "Get Pressure, Temperature, Turbo Speed, Read Error" << endl << "Command: ";
+		cout << endl << "Select between: " << endl << "Pump Station, Turbo Pump, Backing Pump Mode, Gas Mode," << endl << "Temperature, Turbo Speed, Read Error" << endl << "Command: ";
 
 		// What should we do?
 		string command = "";
@@ -117,11 +117,6 @@ int _tmain(int argc, _TCHAR* argv[])
 				cout << "I dont understand you :| returning to beginning"  << endl  << endl;
 			}
 		}
-		else if(command == "Get Pressure")
-		{
-			// id = 340
-
-		}
 		else if(command == "Temperature")
 		{
 			cout << endl << "Select between: Electronics, Pump Bottom, Bearing or Motor"  << endl << "Command: ";
@@ -171,10 +166,13 @@ int _tmain(int argc, _TCHAR* argv[])
 		else if(command == "Read Error")	
 		{
 			cout << endl << "Select History: 1, 2, 3, 4, 5, 6, 7, 8, 9 or 10 "  << endl << "Command: ";
-			getline(cin, value);
+			int value;
+			cin >> value;
 
-			if(value >= "1" && value <= "10"){ // 1 (360), 2 (361), 3 (362), 4 (363), 5 (364), 6 (365), 7 (366), 8 (367), 9 (368) or 10 (369)
-					
+			string error;
+			if(value >= 1 && value <= 10){ // 1 (360), 2 (361), 3 (362), 4 (363), 5 (364), 6 (365), 7 (366), 8 (367), 9 (368) or 10 (369)
+				error = TC110->GetError(value);
+				cout << error << endl << endl;
 			}else{
 				cout << "I dont understand you :| returning to beginning"  << endl  << endl;
 			}

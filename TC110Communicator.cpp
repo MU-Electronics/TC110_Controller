@@ -375,13 +375,12 @@ double TC110Communicator::GetTemperature(int location)
 
 	// Send request, receive it and check it's valid
 	std::string response = this->send("00", param, "=?", 20);
-	std::cout << response << std::endl << std::endl;
 
 	if(response != "false"){
 		// Take the data we want
 		response = response.erase( response.length()-3 );
 		response = response.substr( 11, 15 );
-		std::cout << response << std::endl << std::endl;
+
 		// Return as double to match Pfeiffer RS485 spec
 		return atof(response.c_str());
 	}

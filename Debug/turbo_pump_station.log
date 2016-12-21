@@ -1,4 +1,4 @@
-﻿Build started 20/12/2016 11:01:13.
+﻿Build started 21/12/2016 17:06:56.
      1>Project "C:\Users\electronics\Desktop\Gas rig\tests\cpp\turbo_pump_station\turbo_pump_station\turbo_pump_station.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Program Files\boost\boost_1_62_0" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt turbo_pump_station.cpp
@@ -12,4 +12,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.49
+Time Elapsed 00:00:02.44
